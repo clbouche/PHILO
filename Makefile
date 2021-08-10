@@ -49,7 +49,9 @@ INCLUDES += -I /includes/philo.h
 
 PATH_SRCS = srcs
 
-SRCS += test_thread.c
+SRCS += philo.c
+SRCS += parsing.c
+SRCS += utils.c
 
 vpath %.c $(PATH_SRCS)
 

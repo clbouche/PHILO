@@ -6,12 +6,19 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 15:02:02 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/10 15:35:31 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/10 17:12:43 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
+
+/*
+** DEFINE
+*/
+
+#define ERR_NUM "The arguments must be numerical"
+#define ERR_NB_ARGS "The execution of the program requires 5 or 6 parameters"
 
 /*
 ** LIBRAIRIES
@@ -43,11 +50,11 @@ typedef struct s_philo
 /*data que les threads partage*/
 typedef	struct s_thread_data
 {
-	pthread_t		nb_of_philo; //arg1
-	int				time_to_die; //arg2
-	int				time_to_eat;//arg3
-	int				time_to_sleep; //arg4
-	int				nb_meals_per_philo; //(arg 5)
+	int	nb_of_philo; //arg1
+	int	time_to_die; //arg2
+	int	time_to_eat;//arg3
+	int	time_to_sleep; //arg4
+	int	nb_meals_per_philo; //(arg 5)
 }				t_thread_data;
 
 
@@ -55,6 +62,8 @@ typedef	struct s_thread_data
 ** FUNCTIONS
 */
 
-void	recup_args(int argc, char **argv);
+void	recup_args(int argc, char **argv, t_thread_data *data);
+int		ft_atoi(const char *str);
+void	ft_error(char *error);
 
 #endif
