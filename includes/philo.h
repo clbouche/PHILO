@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 15:02:02 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/11 14:16:47 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/11 14:25:05 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_philo
 	//pthread_mutex_t	right_fork;
 	//pthread_mutex_t	left_fork;
 	pthread_t		thread_id;
-	t_thread_data	*data;
+	//t_thread_data	data;
 	int				id;
 }				t_philo;
 
