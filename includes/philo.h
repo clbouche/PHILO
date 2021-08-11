@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 15:02:02 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/11 14:25:05 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/11 15:03:01 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 #define ERR_NUM "The arguments must be numerical"
 #define ERR_NB_ARGS "The execution of the program requires 5 or 6 parameters"
+#define ERR_NB_PHILO "No philosopher wants to eat"
 
 /*
 ** LIBRAIRIES
