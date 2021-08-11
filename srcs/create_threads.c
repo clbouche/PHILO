@@ -1,48 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   create_threads.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/10 16:56:16 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/11 14:16:34 by clbouche         ###   ########.fr       */
+/*   Created: 2021/08/11 12:38:50 by clbouche          #+#    #+#             */
+/*   Updated: 2021/08/11 14:16:31 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	ft_error(char *error)
+void    *routine()
 {
-	printf("Error : %s\n", error);
-	exit(-1);
+    printf("ca marche\n");
+    return (NULL);
 }
 
-int		ft_isdigit(int c)
+void	create_threads(t_params *params)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
-
-int		ft_atoi(const char *str)
-{
-	int i;
-	int sign;
-	int rslt;
+	int	i;
+	pthread_t               thread_id[5];
 
 	i = 0;
-	sign = 1;
-	rslt = 0;
-	while (str[i])
+	while (i < params->data.nb_of_philo)
 	{
-		if (ft_isdigit(str[i]))
-		{
-			rslt = rslt * 10 + (str[i] - '0');
-			i++;
-		}
-		else
-			ft_error(ERR_NUM);
+		printf("Creating philo : [%d]\n", i);
+		//pthread_create(&params->philo[i].thread_id, NULL, routine, &params->philo[i]);
+		pthread_create(&thread_id[i], NULL, routine, &params->philo[i]);
+		i++;
 	}
-	return (rslt * sign);
 }

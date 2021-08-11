@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 15:02:02 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/10 17:12:43 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/11 14:16:47 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,6 @@
 ** STRUCTURES
 */
 
-
-/*detail pour chaque philo*/
-typedef struct s_philo
-{
-	//pthread_mutex_t	right_fork;
-	//pthread_mutex_t	left_fork;
-	int		thread_id;
-	char	*message;
-	//t_thread_data	*data;
-
-}				t_philo;
-
-/*data que les threads partage*/
 typedef	struct s_thread_data
 {
 	int	nb_of_philo; //arg1
@@ -57,12 +44,28 @@ typedef	struct s_thread_data
 	int	nb_meals_per_philo; //(arg 5)
 }				t_thread_data;
 
+typedef struct s_philo
+{
+	//pthread_mutex_t	right_fork;
+	//pthread_mutex_t	left_fork;
+	pthread_t		thread_id;
+	t_thread_data	*data;
+	int				id;
+}				t_philo;
+
+typedef	struct	s_params
+{
+	t_philo			*philo;
+	t_thread_data	data;
+}				t_params;
+
 
 /*
 ** FUNCTIONS
 */
 
-void	recup_args(int argc, char **argv, t_thread_data *data);
+void	recup_args(int argc, char **argv, t_params *params);
+void	create_threads(t_params *params);
 int		ft_atoi(const char *str);
 void	ft_error(char *error);
 

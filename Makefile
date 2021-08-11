@@ -52,6 +52,7 @@ PATH_SRCS = srcs
 SRCS += philo.c
 SRCS += parsing.c
 SRCS += utils.c
+SRCS += create_threads.c
 
 vpath %.c $(PATH_SRCS)
 
