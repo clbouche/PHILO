@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 15:02:02 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/11 15:03:01 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/11 16:54:23 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ typedef	struct s_thread_data
 
 typedef struct s_philo
 {
-	//pthread_mutex_t	right_fork;
-	//pthread_mutex_t	left_fork;
-	pthread_t		thread_id;
+	pthread_t		thread;
+	pthread_mutex_t	right_fork;
+	pthread_mutex_t	left_fork;
+	pthread_mutex_t	message;
 	//t_thread_data	data;
 	int				id;
 }				t_philo;
@@ -65,7 +66,7 @@ typedef	struct	s_params
 ** FUNCTIONS
 */
 
-void	recup_args(int argc, char **argv, t_params *params);
+void	parsing(int argc, char **argv, t_params *params);
 void	create_threads(t_params *params);
 int		ft_atoi(const char *str);
 void	ft_error(char *error);

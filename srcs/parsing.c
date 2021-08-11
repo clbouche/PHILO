@@ -6,13 +6,13 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:16:47 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/11 15:12:53 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/11 16:36:22 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	recup_args(int argc, char **argv, t_params *params)
+void	parsing(int argc, char **argv, t_params *params)
 {
 	if (argc == 5 || argc == 6)
 	{
