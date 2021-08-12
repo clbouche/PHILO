@@ -6,43 +6,48 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 12:38:50 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/11 17:20:44 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/12 15:14:27 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	philo_message(t_philo *philo, char *msg)
+
+
+
+/*void	thinking(t_philo *philo)
 {
-	//printf("timestamp_in_ms\n");
-	printf("Philo %d %s\n", philo->id, msg);
-}
+
+}*/
+
+/*void	sleeping(t_philo *philo)
+{
+
+}*/
 
 void	eating(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->right_fork);
-	pthread_mutex_lock(&philo->message);
-	philo_message(philo, "has taken a fork");
-	pthread_mutex_unlock(&philo->right_fork);
-	pthread_mutex_unlock(&philo->message);
-    pthread_mutex_lock(&philo->left_fork);
-	pthread_mutex_lock(&philo->message);
-	philo_message(philo, "has taken a fork");
+	//printf("philo id : [%d]\n", philo->id);
+	pthread_mutex_lock(&philo->left_fork);
+	pthread_mutex_lock(&philo->params->message);
+	philo_message(philo, "has taken a fork\n");
+	pthread_mutex_unlock(&philo->params->message);
+	pthread_mutex_lock (philo->right_fork);
+	pthread_mutex_lock(&philo->params->message);
+	philo_message(philo, "has taken a fork\n");
+	pthread_mutex_unlock(&philo->params->message);
+	pthread_mutex_lock(&philo->params->message);
+	philo_message(philo, "is eating\n");
+	pthread_mutex_unlock(&philo->params->message);
+	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(&philo->left_fork);
-	pthread_mutex_unlock(&philo->message);
-	//verifier que le philo a bien 2 forks avant de commencer a manger
-	pthread_mutex_lock(&philo->message);
-	philo_message(philo, "is eating");
-	pthread_mutex_unlock(&philo->message);
 }
 
-void    *routine(void	*data)
+void	*routine(void *data)
 {
 	t_philo		*philo;
-    
+
 	philo = (t_philo *)data;
-	if (!philo->id % 2 == 0)
-		usleep(10); //mais usleep interrompt le programme dans son ensemble :( 
 	eating(philo);
 	//sleeping(philo);
 	//thinking(philo);
@@ -56,8 +61,17 @@ void	create_threads(t_params *params)
 	i = 0;
 	while (i < params->data.nb_of_philo)
 	{
-		pthread_create(&params->philo[i].thread, NULL, routine, &params->philo[i]);
-		i++;
+		pthread_create(&params->philo[i].thread, NULL,
+			routine, &params->philo[i]);
+		i += 2;
+	}
+	i = 1;
+	usleep(100);
+	while (i < params->data.nb_of_philo)
+	{
+		pthread_create(&params->philo[i].thread, NULL,
+			routine, &params->philo[i]);
+		i += 2;
 	}
 }
 

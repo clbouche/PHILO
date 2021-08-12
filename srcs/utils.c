@@ -6,11 +6,25 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 16:56:16 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/11 14:16:34 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/12 15:14:42 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+void	philo_message(t_philo *philo, char *msg)
+{
+	int i;
+
+	i = 0;
+	//printf("timestamp_in_ms\n");
+	while (msg[i])
+	{
+		write(1, &msg[i], 1);
+		i++;
+	}
+	//printf("Philo %d %s\n", philo->id, msg);
+}
 
 void	ft_error(char *error)
 {
@@ -18,18 +32,18 @@ void	ft_error(char *error)
 	exit(-1);
 }
 
-int		ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	int i;
-	int sign;
-	int rslt;
+	int	i;
+	int	sign;
+	int	rslt;
 
 	i = 0;
 	sign = 1;

@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 15:02:02 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/11 16:54:23 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/12 14:40:43 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,14 @@ typedef	struct s_thread_data
 	int	nb_meals_per_philo; //(arg 5)
 }				t_thread_data;
 
+struct s_params;
+
 typedef struct s_philo
 {
 	pthread_t		thread;
-	pthread_mutex_t	right_fork;
+	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	left_fork;
-	pthread_mutex_t	message;
-	//t_thread_data	data;
+	struct s_params		*params;
 	int				id;
 }				t_philo;
 
@@ -59,6 +60,7 @@ typedef	struct	s_params
 {
 	t_philo			*philo;
 	t_thread_data	data;
+	pthread_mutex_t	message;
 }				t_params;
 
 
@@ -70,5 +72,6 @@ void	parsing(int argc, char **argv, t_params *params);
 void	create_threads(t_params *params);
 int		ft_atoi(const char *str);
 void	ft_error(char *error);
+void	philo_message(t_philo *philo, char *msg);
 
 #endif

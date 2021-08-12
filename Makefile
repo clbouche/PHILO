@@ -16,6 +16,7 @@ CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -Werror
 CFLAGS += -pthread
+CFLAGS += -fsanitize=address
 
 ###################
 # PRINT VARIABLES #

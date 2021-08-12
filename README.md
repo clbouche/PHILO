@@ -51,10 +51,17 @@ int main()
 ```
 
 <h2>Comprendre les mutex</h2>
+```
+```
+
+<h2>Organisation</h2>
+
+__ETAPE 1__
+
 
 
 <h3>RESSOURCES</h3>
--  https://www.youtube.com/watch?v=o_GbRujGCnM   
--  https://hpc-tutorials.llnl.gov/posix/  
-
+- https://www.youtube.com/watch?v=uA8X5zNOGw8&list=PL9IEJIKnBJjFZxuqyJ9JqVYmuFZHr7CFM&index=2
+- https://www.youtube.com/watch?v=o_GbRujGCnM
+- https://hpc-tutorials.llnl.gov/posix/  
 
