@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:16:47 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/12 12:34:56 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/13 15:12:48 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	parsing(int argc, char **argv, t_params *params)
 {
+	params->data.start_time = actual_time();
 	if (argc == 5 || argc == 6)
 	{
 		params->data.nb_of_philo = ft_atoi(argv[1]);
@@ -29,9 +30,4 @@ void	parsing(int argc, char **argv, t_params *params)
 	}
 	else
 		ft_error(ERR_NB_ARGS);
-	printf("check nb of philo : %d\n", params->data.nb_of_philo);
-	printf("check time to die : %d\n", params->data.time_to_die);
-	printf("check time to eat : %d\n", params->data.time_to_eat);
-	printf("check time to sleep : %d\n", params->data.time_to_sleep);
-	printf("check nb meals per philo : %d\n\n\n", params->data.nb_meals_per_philo);
 }

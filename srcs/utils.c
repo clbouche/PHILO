@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 16:56:16 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/12 15:14:42 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/13 16:04:09 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,11 @@
 
 void	philo_message(t_philo *philo, char *msg)
 {
-	int i;
+	int	i;
+	long int	time;
 
-	i = 0;
-	//printf("timestamp_in_ms\n");
-	while (msg[i])
-	{
-		write(1, &msg[i], 1);
-		i++;
-	}
-	//printf("Philo %d %s\n", philo->id, msg);
+	//time = actual_time() - philo->params->data.start_time;
+	printf("%ld  Philo %d %s\n", time, philo->id, msg);
 }
 
 void	ft_error(char *error)
