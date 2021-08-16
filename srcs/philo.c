@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 15:01:18 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/13 13:15:24 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/16 17:09:21 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	initialisation(t_params *params)
 	int	i;
 
 	i = 0;
+	params->data.start_time = get_time();
 	params->philo = malloc(sizeof(t_philo) * params->data.nb_of_philo);
 	if (!params->philo)
 		ft_error(ERR_MALLOC);
@@ -45,6 +46,25 @@ int	initialisation(t_params *params)
 	return (1);
 }
 
+void	parsing(int argc, char **argv, t_params *params)
+{
+	if (argc == 5 || argc == 6)
+	{
+		params->data.nb_of_philo = ft_atoi(argv[1]);
+		if (params->data.nb_of_philo < 1)
+			ft_error(ERR_NB_PHILO);
+		params->data.time_to_die = ft_atoi(argv[2]) * 1000; 
+		params->data.time_to_eat = ft_atoi(argv[3]) * 1000;
+		params->data.time_to_sleep = ft_atoi(argv[4]) * 1000;
+		if (argc == 6)
+			params->data.nb_meals_per_philo = ft_atoi(argv[5]);
+		else
+			params->data.nb_meals_per_philo = -1;
+	}
+	else
+		ft_error(ERR_NB_ARGS);
+}
+
 int	main(int argc, char **argv)
 {
 	t_params	params;
@@ -58,6 +78,6 @@ int	main(int argc, char **argv)
 		ft_error(ERR_INIT);
 	}
 	create_threads(&params);
-	ending(&params);
+	//ending(&params);
 	return (0);
 }
