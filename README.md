@@ -73,6 +73,7 @@ __LANCEMENT__
 	-> permet d'eviter que chaque philo ait la fourchette de gauche sans pouvoir prendre celle de droite
 
 __COMPORTEMENTS DE BASE__
+
 - MANGER 
 	- bloquer l'obtention de la fourchette de gauche jusqu'a avoir termine de manger
 	- bloquer la fourchette de droite a l'identique
@@ -85,12 +86,14 @@ __COMPORTEMENTS DE BASE__
 	- afficher le message 
 
 __GESTION DU TEMPS__
+
 //comment est recupere le temps par la fonction gettimeofday 
 //recuperer le temps de depart
 //convertir en temps affichable comme le projet le demande = millisecondes
 //afficher le moment ou l'action est faites en soustrayant le temps de depart du temps actuel + operations = affichage en millisecondes 
 
 __MORT D'UN PHILO__
+
 - besoin de checker sa mort : 
 	- timer qui demarre apres avoir termine de manger 
 	- et qui se reinitialise a chaque fois
@@ -99,7 +102,13 @@ __MORT D'UN PHILO__
 	- thread de mort qui check en continue la mort d'un philo 
 
 <h3>RESSOURCES</h3>
+
 - https://www.youtube.com/watch?v=uA8X5zNOGw8&list=PL9IEJIKnBJjFZxuqyJ9JqVYmuFZHr7CFM&index=2
 - https://www.youtube.com/watch?v=o_GbRujGCnM
 - https://hpc-tutorials.llnl.gov/posix/  
 
+<h3>TESTEURS</h3>
+
+- https://github.com/newlinuxbot/Philosphers-42Project-Tester
+- https://github.com/nesvoboda/socrates
+- https://github.com/cacharle/philosophers_test
