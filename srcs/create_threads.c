@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 12:38:50 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/16 17:09:38 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/17 12:48:01 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,33 @@
 
 void	thinking(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->params->message);
+	pthread_mutex_lock(&philo->data->message);
 	philo_message(philo, "is thinking\n");
-	pthread_mutex_unlock(&philo->params->message);
+	pthread_mutex_unlock(&philo->data->message);
 }
 
 void	sleeping(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->params->message);
+	pthread_mutex_lock(&philo->data->message);
 	philo_message(philo, "is sleeping\n");
-	pthread_mutex_unlock(&philo->params->message);
-	usleep(philo->params->data.time_to_sleep);
+	pthread_mutex_unlock(&philo->data->message);
+	usleep(philo->data->time_to_sleep);
 }
 
 void	eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->left_fork);
-	pthread_mutex_lock(&philo->params->message);
+	pthread_mutex_lock(&philo->data->message);
 	philo_message(philo, "has taken a fork\n");
-	pthread_mutex_unlock(&philo->params->message);
+	pthread_mutex_unlock(&philo->data->message);
 	pthread_mutex_lock (philo->right_fork);
-	pthread_mutex_lock(&philo->params->message);
+	pthread_mutex_lock(&philo->data->message);
 	philo_message(philo, "has taken a fork\n");
-	pthread_mutex_unlock(&philo->params->message);
-	pthread_mutex_lock(&philo->params->message);
+	pthread_mutex_unlock(&philo->data->message);
+	pthread_mutex_lock(&philo->data->message);
 	philo_message(philo, "is eating\n");
-	pthread_mutex_unlock(&philo->params->message);
-	usleep(philo->params->data.time_to_eat);
+	pthread_mutex_unlock(&philo->data->message);
+	usleep(philo->data->time_to_eat);
 	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(&philo->left_fork);
 }
@@ -51,12 +51,12 @@ void	*routine(void *data)
 
 	philo = (t_philo *)data;
 	eating(philo);
-	//sleeping(philo);
-	//thinking(philo);
+	sleeping(philo);
+	thinking(philo);
 	return (NULL);
 }
 
-void	create_threads(t_params *params)
+int	create_threads(t_params *params)
 {
 	int	i;
 
@@ -75,4 +75,5 @@ void	create_threads(t_params *params)
 			routine, &params->philo[i]);
 		i += 2;
 	}
+	return (1);
 }

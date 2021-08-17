@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:16:47 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/16 17:09:29 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/17 12:48:05 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,12 @@ long long   get_time(void)
 
 void	philo_message(t_philo *philo, char *msg)
 {
-	//long long	time;
-	//printf("start time : %lld\n", philo->params->data.start_time);
-	//time = get_time() - philo->params->data.start_time;
-	//printf("%lld", time);
-	printf("   Philo %d %s\n", philo->id, msg);
+	long long	time;
+
+	time = -1;
+	time = get_time() - philo->data->start_time;
+	printf("%lld   Philo %d %s\n", time, philo->id, msg);
 }
-
-/*int main(void)
-{
-    long long start_time;
-		
-		// Remember when we started
-    start_time = get_time();
-
-    while (1)
-    {
-				// Print time from start, in ms
-        printf("%lld\n", get_time() - start_time);
-
-				// Sleep 200 times 1000 microseconds (1 millisecond)
-        usleep(200 * 1000);
-    }
-}*/
 
 
 /*void	ft_usleep(long int time_to_go)
