@@ -54,11 +54,49 @@ int main()
 ```
 ```
 
-<h2>Organisation</h2>
+<h2>Projet</h2>
 
-__ETAPE 1__
+__INITIALISATION__
 
+- chaque philo doit avoir 2 fourchettes : 
+	- sa fourchette de gauche 
+	- la fourchette a droite : pointeur sur la fourchette de gauche de son voisin de droite 
+- mutex init :
+	- un mutex pour afficher le message pour eviter scrambled
+	- un mutex pour la fourchette de gauche
+	- un mutex pour la fourchette de droite 
 
+__LANCEMENT__
+
+- creer d'abord les threads des philos pairs (s'affiche comme impair car l'id des philos est i + 1)
+- creer ensuite les threads des philos impairs
+	-> permet d'eviter que chaque philo ait la fourchette de gauche sans pouvoir prendre celle de droite
+
+__COMPORTEMENTS DE BASE__
+- MANGER 
+	- bloquer l'obtention de la fourchette de gauche jusqu'a avoir termine de manger
+	- bloquer la fourchette de droite a l'identique
+	- afficher les 3 messages
+	- usleep 
+- DORMIR
+	- afficher le message
+	- usleep 
+- PENSER
+	- afficher le message 
+
+__GESTION DU TEMPS__
+//comment est recupere le temps par la fonction gettimeofday 
+//recuperer le temps de depart
+//convertir en temps affichable comme le projet le demande = millisecondes
+//afficher le moment ou l'action est faites en soustrayant le temps de depart du temps actuel + operations = affichage en millisecondes 
+
+__MORT D'UN PHILO__
+- besoin de checker sa mort : 
+	- timer qui demarre apres avoir termine de manger 
+	- et qui se reinitialise a chaque fois
+	- si le temps actuel == time_to_die = mort 
+- besoin d'arreter le programme : 
+	- thread de mort qui check en continue la mort d'un philo 
 
 <h3>RESSOURCES</h3>
 - https://www.youtube.com/watch?v=uA8X5zNOGw8&list=PL9IEJIKnBJjFZxuqyJ9JqVYmuFZHr7CFM&index=2
