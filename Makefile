@@ -16,7 +16,7 @@ CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -Werror
 CFLAGS += -pthread
-#CFLAGS += -fsanitize=address
+CFLAGS += -fsanitize=address
 
 ###################
 # PRINT VARIABLES #
@@ -51,10 +51,9 @@ INCLUDES += -I /includes/philo.h
 PATH_SRCS = srcs
 
 SRCS += philo.c
-SRCS += parsing.c
+SRCS += get_time.c
 SRCS += utils.c
 SRCS += create_threads.c
-SRCS += utils_2.c
 
 vpath %.c $(PATH_SRCS)
 
