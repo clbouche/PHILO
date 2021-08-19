@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 15:02:02 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/17 12:46:09 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/19 14:30:40 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@
 ** DEFINE
 */
 
+# define DEAD 1
+# define ALIVE 0
+# define FULL_BELLY 2
 # define ERR_NUM "The arguments must be numerical"
 # define ERR_NB_ARGS "The execution of the program requires 5 or 6 parameters"
 # define ERR_NB_PHILO "No philosopher wants to eat"
 # define ERR_INIT "Something went wrong with initialization"
 # define ERR_MALLOC "Malloc returned NULL value"
-
+# define ERR_THREAD "The creation of thread doesn't work"
 /*
 ** LIBRAIRIES
 */
@@ -45,8 +48,15 @@ typedef struct s_thread_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nb_meals_per_philo;
+	int				timer_death;
+	//int			full_belly;
+	int				dead_signal;
 	long long		start_time;
 	pthread_mutex_t	message;
+	pthread_mutex_t end;
+	pthread_mutex_t finish;
+	pthread_mutex_t	mutex_eat;
+	//pthread_mutex_t	max_meals;
 }				t_thread_data;
 
 struct	s_params;
@@ -54,10 +64,12 @@ struct	s_params;
 typedef struct s_philo
 {
 	pthread_t		thread;
+	pthread_t		thread_death;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	left_fork;
 	t_thread_data	*data;
 	int				id;
+	unsigned int				nb_meal;
 }				t_philo;
 
 typedef struct s_params
@@ -77,5 +89,7 @@ void		ft_error(char *error);
 void		philo_message(t_philo *philo, char *msg);
 long long   get_time(void);
 void		ft_usleep(long int time_to_go);
+int			check_death(t_philo *philo, int i);
+void		*is_dead(void *data);
 
 #endif
