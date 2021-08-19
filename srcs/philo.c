@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 15:01:18 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/17 12:48:07 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/19 14:29:53 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ void	ending(t_params *params)
 {
 	int i;
 
-	i = 0;
+	i = -1;
 	while (++i < params->data.nb_of_philo)
 		pthread_join(params->philo[i].thread, NULL);
+	i = -1;
+	while (++i < params->data.nb_of_philo)
+		pthread_join(params->philo[i].thread_death, NULL);
 	while (++i < params->data.nb_of_philo)
 		pthread_mutex_destroy(&params->philo[i].left_fork);
 	pthread_mutex_destroy(&params->data.message);
@@ -31,14 +34,18 @@ int	initialisation(t_params *params)
 
 	i = 0;
 	params->data.start_time = get_time();
+	params->data.dead_signal = 0;
 	params->philo = malloc(sizeof(t_philo) * params->data.nb_of_philo);
 	if (!params->philo)
 		ft_error(ERR_MALLOC);
 	pthread_mutex_init(&params->data.message, NULL);
+	pthread_mutex_init(&params->data.end, NULL);
+	pthread_mutex_init(&params->data.finish, NULL);
 	while (i < params->data.nb_of_philo)
 	{
 		params->philo[i].data = &params->data;
 		params->philo[i].id = i + 1;
+		params->philo[i].nb_meal = 0;
 		params->philo[i].right_fork= NULL;
 		pthread_mutex_init(&params->philo[i].left_fork, NULL);
 		if (i == params->data.nb_of_philo == 1)
@@ -64,7 +71,6 @@ void	parsing(int argc, char **argv, t_params *params)
 			params->data.nb_meals_per_philo = ft_atoi(argv[5]);
 		else
 			params->data.nb_meals_per_philo = -1;
-		//checker si un arg est negatif
 	}
 	else
 		ft_error(ERR_NB_ARGS);

@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:16:47 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/17 12:48:05 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/19 14:30:15 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	philo_message(t_philo *philo, char *msg)
 
 	time = -1;
 	time = get_time() - philo->data->start_time;
-	printf("%lld   Philo %d %s\n", time, philo->id, msg);
+	if (!check_death(philo, ALIVE))
+		printf("%lld   Philo %d %s\n", time, philo->id, msg);
 }
 
 
