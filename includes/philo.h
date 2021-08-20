@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 15:02:02 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/19 14:30:40 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/20 14:32:33 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@
 # define DEAD 1
 # define ALIVE 0
 # define FULL_BELLY 2
-# define ERR_NUM "The arguments must be numerical"
+# define ERR_NUM "The arguments must be numerical and positive numbers"
 # define ERR_NB_ARGS "The execution of the program requires 5 or 6 parameters"
 # define ERR_NB_PHILO "No philosopher wants to eat"
 # define ERR_INIT "Something went wrong with initialization"
 # define ERR_MALLOC "Malloc returned NULL value"
 # define ERR_THREAD "The creation of thread doesn't work"
+# define ERR_ARG "Invalid arguments"
+
 /*
 ** LIBRAIRIES
 */
@@ -48,7 +50,6 @@ typedef struct s_thread_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nb_meals_per_philo;
-	int				timer_death;
 	//int			full_belly;
 	int				dead_signal;
 	long long		start_time;
@@ -69,7 +70,8 @@ typedef struct s_philo
 	pthread_mutex_t	left_fork;
 	t_thread_data	*data;
 	int				id;
-	unsigned int				nb_meal;
+	unsigned int	nb_meal;
+	long long		timer_death;
 }				t_philo;
 
 typedef struct s_params
@@ -82,13 +84,13 @@ typedef struct s_params
 ** FUNCTIONS
 */
 
+void		ft_usleep(long long time_to_go);
 void		parsing(int argc, char **argv, t_params *params);
 int			create_threads(t_params *params);
 int			ft_atoi(const char *str);
 void		ft_error(char *error);
 void		philo_message(t_philo *philo, char *msg);
 long long   get_time(void);
-void		ft_usleep(long int time_to_go);
 int			check_death(t_philo *philo, int i);
 void		*is_dead(void *data);
 
