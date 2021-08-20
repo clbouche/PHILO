@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 15:01:18 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/19 14:29:53 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/20 14:31:30 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,15 @@ int	initialisation(t_params *params)
 	pthread_mutex_init(&params->data.message, NULL);
 	pthread_mutex_init(&params->data.end, NULL);
 	pthread_mutex_init(&params->data.finish, NULL);
+	pthread_mutex_init(&params->data.mutex_eat, NULL);
 	while (i < params->data.nb_of_philo)
 	{
-		params->philo[i].data = &params->data;
+		params->philo[i].timer_death = params->data.start_time;
 		params->philo[i].id = i + 1;
 		params->philo[i].nb_meal = 0;
-		params->philo[i].right_fork= NULL;
+		params->philo[i].right_fork = NULL;
 		pthread_mutex_init(&params->philo[i].left_fork, NULL);
-		if (i == params->data.nb_of_philo == 1)
+		if (i == params->data.nb_of_philo - 1)
 			params->philo[i].right_fork = &params->philo[0].left_fork;
 		else
 			params->philo[i].right_fork = &params->philo[i + 1].left_fork;
@@ -64,13 +65,17 @@ void	parsing(int argc, char **argv, t_params *params)
 		params->data.nb_of_philo = ft_atoi(argv[1]);
 		if (params->data.nb_of_philo < 1)
 			ft_error(ERR_NB_PHILO);
-		params->data.time_to_die = ft_atoi(argv[2]) * 1000; 
-		params->data.time_to_eat = ft_atoi(argv[3]) * 1000;
-		params->data.time_to_sleep = ft_atoi(argv[4]) * 1000;
+		params->data.time_to_die = ft_atoi(argv[2]); 
+		params->data.time_to_eat = ft_atoi(argv[3]);
+		params->data.time_to_sleep = ft_atoi(argv[4]);
 		if (argc == 6)
 			params->data.nb_meals_per_philo = ft_atoi(argv[5]);
 		else
 			params->data.nb_meals_per_philo = -1;
+		if (params->data.time_to_die == 0 ||
+			params->data.time_to_eat == 0 ||
+			params->data.time_to_sleep == 0)
+			ft_error(ERR_ARG);
 	}
 	else
 		ft_error(ERR_NB_ARGS);
