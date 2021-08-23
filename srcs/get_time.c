@@ -6,22 +6,22 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:16:47 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/23 10:12:37 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/23 11:01:35 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-long long   get_time(void)
+long long	get_time(void)
 {
-    struct timeval  tp;
-    long long            milliseconds;
+	struct timeval	tp;
+	long long		milliseconds;
 
 	milliseconds = 0;
-    gettimeofday(&tp, NULL);
-    milliseconds = tp.tv_sec * 1000;
-    milliseconds += tp.tv_usec / 1000;
-    return (milliseconds);
+	gettimeofday(&tp, NULL);
+	milliseconds = tp.tv_sec * 1000;
+	milliseconds += tp.tv_usec / 1000;
+	return (milliseconds);
 }
 
 void	philo_message(t_philo *philo, char *msg)

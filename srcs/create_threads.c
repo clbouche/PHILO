@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 12:38:50 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/23 10:41:37 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/23 11:00:30 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	*routine(void *data)
 	t_philo		*philo;
 
 	philo = (t_philo *)data;
-	int i = 0;
 	while (!check_death(philo, ALIVE))
 	{
 		pthread_create(&philo->thread_death, NULL, is_dead, data);
@@ -69,7 +68,6 @@ void	*routine(void *data)
 				printf("All philos have full belly 🍝 \n");
 				check_death(philo, FULL_BELLY);
 				pthread_mutex_unlock(&philo->data->finish);
-				//break;
 			}
 			pthread_mutex_unlock(&philo->data->finish);
 		}
@@ -95,7 +93,7 @@ int	create_threads(t_params *params)
 	{
 		params->philo[i].data = &params->data;
 		if (pthread_create(&params->philo[i].thread, NULL,
-			routine, &params->philo[i]) != 0)
+				routine, &params->philo[i]) != 0)
 			ft_error(ERR_THREAD);
 		i += 2;
 	}

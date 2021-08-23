@@ -6,13 +6,13 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 16:56:16 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/23 10:52:54 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/23 11:04:54 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int		check_death(t_philo *philo, int i)
+int	check_death(t_philo *philo, int i)
 {
 	pthread_mutex_lock(&philo->data->end);
 	if (i)
@@ -35,8 +35,8 @@ void	*is_dead(void *data)
 	ft_msleep(philo->data->time_to_die + 1);
 	pthread_mutex_lock(&philo->data->mutex_eat);
 	pthread_mutex_lock(&philo->data->finish);
-	if (!check_death(philo, ALIVE) && ((get_time() - philo->timer_death) 
-		>= (long long)(philo->data->time_to_die)))
+	if (!check_death(philo, ALIVE) && ((get_time() - philo->timer_death)
+			>= (long long)(philo->data->time_to_die)))
 	{
 		pthread_mutex_unlock(&philo->data->mutex_eat);
 		pthread_mutex_unlock(&philo->data->finish);
@@ -49,7 +49,6 @@ void	*is_dead(void *data)
 	pthread_mutex_unlock(&philo->data->finish);
 	return (NULL);
 }
-
 
 void	ft_error(char *error)
 {

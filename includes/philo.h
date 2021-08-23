@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 15:02:02 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/23 10:28:58 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/23 10:59:29 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,9 @@ typedef struct s_thread_data
 	int				full_belly;
 	long long		start_time;
 	pthread_mutex_t	message;
-	pthread_mutex_t end;
-	pthread_mutex_t finish;
+	pthread_mutex_t	end;
+	pthread_mutex_t	finish;
 	pthread_mutex_t	mutex_eat;
-	//pthread_mutex_t	max_meals;
 }				t_thread_data;
 
 struct	s_params;
@@ -90,7 +89,7 @@ int			create_threads(t_params *params);
 int			ft_atoi(const char *str);
 void		ft_error(char *error);
 void		philo_message(t_philo *philo, char *msg);
-long long   get_time(void);
+long long	get_time(void);
 int			check_death(t_philo *philo, int i);
 void		*is_dead(void *data);
 

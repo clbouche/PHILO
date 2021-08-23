@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 15:01:18 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/23 10:29:17 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/23 11:04:23 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ending(t_params *params)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < params->data.nb_of_philo)
@@ -28,6 +28,14 @@ void	ending(t_params *params)
 	free(params->philo);
 }
 
+void	init_mutex(t_params *params)
+{
+	pthread_mutex_init(&params->data.message, NULL);
+	pthread_mutex_init(&params->data.end, NULL);
+	pthread_mutex_init(&params->data.finish, NULL);
+	pthread_mutex_init(&params->data.mutex_eat, NULL);
+}
+
 int	initialisation(t_params *params)
 {
 	int	i;
@@ -39,10 +47,7 @@ int	initialisation(t_params *params)
 	params->philo = malloc(sizeof(t_philo) * params->data.nb_of_philo);
 	if (!params->philo)
 		ft_error(ERR_MALLOC);
-	pthread_mutex_init(&params->data.message, NULL);
-	pthread_mutex_init(&params->data.end, NULL);
-	pthread_mutex_init(&params->data.finish, NULL);
-	pthread_mutex_init(&params->data.mutex_eat, NULL);
+	init_mutex(params);
 	while (i < params->data.nb_of_philo)
 	{
 		params->philo[i].timer_death = params->data.start_time;
@@ -66,16 +71,16 @@ void	parsing(int argc, char **argv, t_params *params)
 		params->data.nb_of_philo = ft_atoi(argv[1]);
 		if (params->data.nb_of_philo < 1)
 			ft_error(ERR_NB_PHILO);
-		params->data.time_to_die = ft_atoi(argv[2]); 
+		params->data.time_to_die = ft_atoi(argv[2]);
 		params->data.time_to_eat = ft_atoi(argv[3]);
 		params->data.time_to_sleep = ft_atoi(argv[4]);
 		if (argc == 6)
 			params->data.nb_meals_per_philo = ft_atoi(argv[5]);
 		else
 			params->data.nb_meals_per_philo = -1;
-		if (params->data.time_to_die == 0 ||
-			params->data.time_to_eat == 0 ||
-			params->data.time_to_sleep == 0)
+		if (params->data.time_to_die == 0
+			|| params->data.time_to_eat == 0
+			|| params->data.time_to_sleep == 0)
 			ft_error(ERR_ARG);
 	}
 	else
