@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 12:38:50 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/20 14:20:28 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/23 10:41:37 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	sleeping(t_philo *philo)
 	pthread_mutex_lock(&philo->data->message);
 	philo_message(philo, "is sleeping\n");
 	pthread_mutex_unlock(&philo->data->message);
-	ft_usleep(philo->data->time_to_sleep);
+	ft_msleep(philo->data->time_to_sleep);
 }
 
 void	eating(t_philo *philo)
@@ -43,7 +43,7 @@ void	eating(t_philo *philo)
 	pthread_mutex_lock(&philo->data->message);
 	philo_message(philo, "is eating\n");
 	pthread_mutex_unlock(&philo->data->message);
-	ft_usleep(philo->data->time_to_eat);
+	ft_msleep(philo->data->time_to_eat);
 	pthread_mutex_unlock(philo->right_fork);
 	pthread_mutex_unlock(&philo->left_fork);
 }
@@ -60,7 +60,19 @@ void	*routine(void *data)
 		eating(philo);
 		sleeping(philo);
 		thinking(philo);
-		//if full belly for all philos
+		if (++philo->nb_meal == philo->data->nb_meals_per_philo)
+		{
+			pthread_mutex_lock(&philo->data->finish);
+			philo->data->full_belly++;
+			if (philo->data->full_belly == philo->data->nb_of_philo)
+			{
+				printf("All philos have full belly 🍝 \n");
+				check_death(philo, FULL_BELLY);
+				pthread_mutex_unlock(&philo->data->finish);
+				//break;
+			}
+			pthread_mutex_unlock(&philo->data->finish);
+		}
 	}
 	return (NULL);
 }
@@ -78,7 +90,7 @@ int	create_threads(t_params *params)
 		i += 2;
 	}
 	i = 1;
-	ft_usleep(100);
+	ft_msleep(100);
 	while (i < params->data.nb_of_philo)
 	{
 		params->philo[i].data = &params->data;

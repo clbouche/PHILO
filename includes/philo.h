@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 15:02:02 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/20 14:32:33 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/23 10:28:58 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct s_thread_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nb_meals_per_philo;
-	//int			full_belly;
 	int				dead_signal;
+	int				full_belly;
 	long long		start_time;
 	pthread_mutex_t	message;
 	pthread_mutex_t end;
@@ -84,7 +84,7 @@ typedef struct s_params
 ** FUNCTIONS
 */
 
-void		ft_usleep(long long time_to_go);
+void		ft_msleep(long long time_to_go);
 void		parsing(int argc, char **argv, t_params *params);
 int			create_threads(t_params *params);
 int			ft_atoi(const char *str);

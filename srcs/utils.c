@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 16:56:16 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/20 14:32:02 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/23 10:52:54 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	*is_dead(void *data)
 	long long	end_time;
 
 	philo = (t_philo *)data;
-	ft_usleep(philo->data->time_to_die + 1);
+	ft_msleep(philo->data->time_to_die + 1);
 	pthread_mutex_lock(&philo->data->mutex_eat);
 	pthread_mutex_lock(&philo->data->finish);
 	if (!check_death(philo, ALIVE) && ((get_time() - philo->timer_death) 

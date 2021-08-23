@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 15:01:18 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/20 14:31:30 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/23 10:29:17 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	initialisation(t_params *params)
 	i = 0;
 	params->data.start_time = get_time();
 	params->data.dead_signal = 0;
+	params->data.full_belly = 0;
 	params->philo = malloc(sizeof(t_philo) * params->data.nb_of_philo);
 	if (!params->philo)
 		ft_error(ERR_MALLOC);

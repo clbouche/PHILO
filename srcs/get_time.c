@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:16:47 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/20 14:32:22 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/23 10:12:37 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	philo_message(t_philo *philo, char *msg)
 		printf("%lli   Philo %d %s\n", time, philo->id, msg);
 }
 
-void	ft_usleep(long long time_to_go)
+void	ft_msleep(long long time_to_go)
 {
 	long long	time;
 
