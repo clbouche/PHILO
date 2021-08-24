@@ -6,7 +6,7 @@
 /*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 12:38:50 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/23 11:00:30 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/24 14:20:24 by clbouche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,12 @@ void	eating(t_philo *philo)
 	pthread_mutex_lock(&philo->data->message);
 	philo_message(philo, "has taken a fork\n");
 	pthread_mutex_unlock(&philo->data->message);
-	pthread_mutex_lock (philo->right_fork);
+	if (philo->right_fork == 0)
+	{
+		ft_msleep(philo->data->time_to_die * 2);
+		return ;
+	}
+	pthread_mutex_lock(philo->right_fork);
 	pthread_mutex_lock(&philo->data->message);
 	philo_message(philo, "has taken a fork\n");
 	pthread_mutex_unlock(&philo->data->message);
