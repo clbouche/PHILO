@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 15:01:18 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/23 11:04:23 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/24 12:08:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void	parsing(int argc, char **argv, t_params *params)
 			params->data.nb_meals_per_philo = ft_atoi(argv[5]);
 		else
 			params->data.nb_meals_per_philo = -1;
-		if (params->data.time_to_die == 0
-			|| params->data.time_to_eat == 0
-			|| params->data.time_to_sleep == 0)
+		if (params->data.time_to_die < 60
+			|| params->data.time_to_eat < 60
+			|| params->data.time_to_sleep < 60)
 			ft_error(ERR_ARG);
 	}
 	else
