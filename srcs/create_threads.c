@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_threads.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clbouche <clbouche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 12:38:50 by clbouche          #+#    #+#             */
-/*   Updated: 2021/08/24 14:20:24 by clbouche         ###   ########.fr       */
+/*   Updated: 2021/08/24 14:35:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	*routine(void *data)
 		eating(philo);
 		sleeping(philo);
 		thinking(philo);
+		pthread_detach(philo->thread_death);
 		if (++philo->nb_meal == philo->data->nb_meals_per_philo)
 		{
 			pthread_mutex_lock(&philo->data->finish);
