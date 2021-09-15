@@ -112,3 +112,6 @@ __MORT D'UN PHILO__
 - https://github.com/newlinuxbot/Philosphers-42Project-Tester
 - https://github.com/nesvoboda/socrates
 - https://github.com/cacharle/philosophers_test
+
+
+https://forthebadge.com/images/badges/built-with-love.svg 
